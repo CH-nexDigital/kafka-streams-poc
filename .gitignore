@@ -2,3 +2,6 @@ gradle/
 gladlew*
 .idea/
 .gradle/
+
+src/main/kotlin/com/ippontech/kafkatutorials/events/Event*
+src/main/kotlin/com/ippontech/kafkatutorials/events/Creator2*

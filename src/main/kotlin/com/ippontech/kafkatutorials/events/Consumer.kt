@@ -27,7 +27,14 @@ class Consumer(val brokers: String) {
                     val state = value.split(",")[2]
                     val time = value.split(",")[1].toLong()
                     val limit = System.currentTimeMillis() - 259200000
-                    println("$key //// ${Date(time)} //// $state")
+                    var state_string = "Created"
+                    if (state.contentEquals("1")){
+                        state_string = "Processing"
+                    }
+                    if (state.contentEquals("2")){
+                        state_string = "Resolved"
+                    }
+                    println("Ticket id : $key //// Creation Date : ${Date(time)} //// State : $state_string")
                     (state.toInt() == 0) && (time < limit)
                 } }
 
@@ -36,8 +43,8 @@ class Consumer(val brokers: String) {
             val uuid = value.split(",")[0]
             val time = Date(value.split(",")[1].toLong())
 
-            val state = value.split(",")[2]
-            println("The ticket : $uuid, created on :$time, has been created since 3 days and is still suspending for picking up !! !!\n")
+           // val state = value.split(",")[2]
+            println("The ticket $uuid, created on $time, has been created since more than 3 days and is still suspending for picking up !!!!\n")
         } }
 
 
