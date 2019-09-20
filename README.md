@@ -17,11 +17,11 @@ The **Creator** function simulates the generator of 10 incident tickets.
 
 Each message generated contains three information:
 
-- Creation Date
+- Operation Date
 - Ticket UUID
 - Ticket State ( 0: Creted // 1 : Processing // 2 : Finished )
 
-When a ticket has its state changed, a new message containing the new state will be sent to Kafka.
+When a ticket has its state changed, a new message containing the new operation time and the new state will be sent to Kafka.
 
 ## Event Processor
 
