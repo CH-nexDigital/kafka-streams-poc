@@ -32,3 +32,8 @@ The purpose of this function is to find tickets that have been created since mor
 It will send a console log with tickets UUIDs to alert that those tickets are still pending. In real case, you can replace the console log by any operation that you want : email alerting, ...
 
 This function should be called periodically. For example, at the end of day, or every 10 hours, ...
+
+## Running
+
+1. Run **Creator** to generate messages in Kafka.
+2. Execute **Consumer** to process messages.
