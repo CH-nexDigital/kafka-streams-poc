@@ -13,7 +13,7 @@ class GenerateUUIDs () {
         for (i in 0..size-1) {
             ids[i] = UUID.randomUUID()
         }
-        println(Arrays.toString(ids))
+        return ids
     }
 
 }

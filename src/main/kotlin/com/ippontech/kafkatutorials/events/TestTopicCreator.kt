@@ -25,7 +25,7 @@ class TestTopicCreator2(brokers: String) {
 
     //private val idsstring = "c9e562e5-4674-4adb-8a11-10a854d1c3ab,0cfd33b9-9040-45e1-b91c-95c7c72421fc,4e6c4cc6-4a02-4041-9a38-34aac7c9f64d".split(",")
     private val idsstring = "6df80d55-5d0e-4ef6-8a5d-2626d0a36cc1,b7c57fc7-88bc-4ab5-9d28-841647dec118,477e2b3e-23cf-4a3c-a9bb-a4137ebfb5ce".split(",")
-
+    
     //private val idsstring = "b5a82dca-b70f-4434-ab87-78fb2b387ea5".split(",") //id 1
 
     //private val idsstring = "ef008650-6252-4a3e-80bf-03581304779d".split(",") //id 2
