@@ -5,4 +5,4 @@ gladlew*
 .gradle/
 
 src/main/kotlin/com/ippontech/kafkatutorials/events/Event*
-src/main/kotlin/com/ippontech/kafkatutorials/events/Creator2*
+src/main/kotlin/com/ippontech/kafkatutorials/events/C*
