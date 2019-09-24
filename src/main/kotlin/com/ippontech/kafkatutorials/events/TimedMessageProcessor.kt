@@ -16,10 +16,10 @@ import java.util.HashMap
 // $ kafka-topics --zookeeper localhost:2181 --create --topic ages --replication-factor 1 --partitions 4
 
 fun main(args: Array<String>) {
-    EventProcessorTestTopic("localhost:9092").process()
+    TimedMessageProcessor("localhost:9092").process()
 }
 
-class EventProcessorTestTopic(val brokers: String) {
+class TimedMessageProcessor(val brokers: String) {
 
     val countMap: HashMap<String, Long> = HashMap()
 
@@ -29,7 +29,7 @@ class EventProcessorTestTopic(val brokers: String) {
         val streamsBuilder = StreamsBuilder()
 
         val eventStream: KStream<String, String> = streamsBuilder
-                .stream("test-topic-9", Consumed.with(Serdes.String(), Serdes.String()))
+                .stream("timed-messages", Consumed.with(Serdes.String(), Serdes.String()))
 
         val aggregates: KTable<String, Long> = eventStream
                 .groupByKey(Serialized.with(Serdes.String(), Serdes.String()))
@@ -38,13 +38,13 @@ class EventProcessorTestTopic(val brokers: String) {
         aggregates.toStream().foreach() { key, value -> run {
             println("key: $key    =>    count: $value")
             if (!countMap.containsKey(key) && value.toInt() == 1) {
-                println("//// Un scheduler est entrain de lancer pour key: $key ")
+                println("//// A scheduler is launching for the log with key: $key ")
                 val timer = Timer()
                 val delay = TimeUnit.MINUTES.toMillis(5)
                 timer.schedule(object : TimerTask() {
                     override fun run() {
                         if(countMap.getValue(key).toInt()==1){
-                            println("ALERTE : 5 MINUTES EST PASSE POUR key: $key et le nombre de message recu actuel est ${countMap.getValue(key)}");
+                            println("ALERT : 5 Minutes passed for the log with key: $key and there are no successive messages.");
                         } else {
                             countMap.remove(key)
                         }
@@ -62,7 +62,7 @@ class EventProcessorTestTopic(val brokers: String) {
         val props = Properties()
         props["bootstrap.servers"] = brokers
         props["application.id"] = "kafka-tutorial-events-4-${System.currentTimeMillis()}"
-        props["auto.offset.reset"] = "earliest"
+        props["auto.offset.reset"] = "latest"
         props["commit.interval.ms"] = 0
         val streams = KafkaStreams(topology, props)
         streams.start()
