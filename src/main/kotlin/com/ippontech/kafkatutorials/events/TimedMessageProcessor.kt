@@ -9,12 +9,6 @@ import java.util.*
 import java.util.concurrent.TimeUnit
 import java.util.HashMap
 
-
-
-
-
-// $ kafka-topics --zookeeper localhost:2181 --create --topic ages --replication-factor 1 --partitions 4
-
 fun main(args: Array<String>) {
     TimedMessageProcessor("localhost:9092").process()
 }
@@ -22,8 +16,6 @@ fun main(args: Array<String>) {
 class TimedMessageProcessor(val brokers: String) {
 
     val countMap: HashMap<String, Long> = HashMap()
-
-
 
     fun process() {
         val streamsBuilder = StreamsBuilder()
