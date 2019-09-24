@@ -34,6 +34,10 @@ class TimedMessageCreator(brokers: String) {
 
         for (i in 0..size-1) {
             ids[i] = UUID.randomUUID()
+            /*State is used to know if the UUID is anormal or not
+            If state != 2, then it is a normal case. Two messages will be sent.
+            Else, only the first message will be sent.
+             */
             states[i] = randomGenerator.nextInt(3)
 
             val delay1 = Math.random() * (2L) * TimeUnit.MINUTES.toMillis(1).toDouble()
